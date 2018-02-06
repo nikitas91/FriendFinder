@@ -1,0 +1,28 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "FriendFinder App Package",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikitas91/FriendFinder.git"
+  },
+  "keywords": [
+    "friendfinder",
+    "friend-finder"
+  ],
+  "author": "Nikita Sasunkevich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikitas91/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/nikitas91/FriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
