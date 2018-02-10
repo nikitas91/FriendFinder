@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <h3>Question 4</h3>
                     <label for="q4">You rarely do something just out of sheer curiosity.</label>
-                    <select name="question-four" id="q4" class="form-control">
+                    <select id="q4" class="form-control">
                         <option value="" disabled selected>Select an option</option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2</option>
@@ -197,31 +197,50 @@
         $('#submitSurvey').on('click', function (event) {
             event.preventDefault();
 
-            var userInput = {
-                name: $('#userName').val().trim(),
-                photo: $('#userPhoto').val().trim(),
-                scores: [
-                    $('#q1').val().trim(),
-                    $('#q2').val().trim(),
-                    $('#q3').val().trim(),
-                    $('#q4').val().trim(),
-                    $('#q5').val().trim(),
-                    $('#q6').val().trim(),
-                    $('#q7').val().trim(),
-                    $('#q8').val().trim(),
-                    $('#q9').val().trim(),
-                    $('#q10').val().trim()
-                ]
-            };
+            if (validateForm()) {
+                var userInput = {
+                    name: $('#userName').val().trim(),
+                    photo: $('#userPhoto').val().trim(),
+                    scores: [
+                        $('#q1').val().trim(),
+                        $('#q2').val().trim(),
+                        $('#q3').val().trim(),
+                        $('#q4').val().trim(),
+                        $('#q5').val().trim(),
+                        $('#q6').val().trim(),
+                        $('#q7').val().trim(),
+                        $('#q8').val().trim(),
+                        $('#q9').val().trim(),
+                        $('#q10').val().trim()
+                    ]
+                };
 
-            $.post('/api/friends', userInput).done(function (data) {
-                console.log(data);
+                $.post('/api/friends', userInput).done(function (data) {
+                    console.log(data);
 
-                $("#userMatchName").html(data.matchName);
-                $("#userMatchImage").attr("src", data.matchImage);
-                $("#resultsModal").modal();
-            });
+                    $("#userMatchName").html(data.matchName);
+                    $("#userMatchImage").attr("src", data.matchImage);
+                    $("#resultsModal").modal();
+                });
+            }
+            else {
+                alert("Please fill out all fields before submitting!");
+            }
         });
+
+        function validateForm() {
+            var validated = true;
+
+            if($("#userName").val() == "") validated = false;
+            if($("#userPhoto").val() == "") validated = false;
+
+            $("select > option:selected").each(function(){
+                console.log($(this).val());
+                if($(this).val() == "") validated = false;
+            });
+
+            return validated;
+        };
     </script>
 </body>
 
