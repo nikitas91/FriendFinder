@@ -1,0 +1,50 @@
+body{
+    background-color: #3b5998;
+}
+
+/* Jumbotron styles */
+.jumbotron{
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0 !important;
+    margin: 0;
+}
+
+.landing-jumbotron{
+    position: relative;
+    width: 70%;
+}
+
+.vertical-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.landing-jumbotron .lj-header{
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+.landing-jumbotron .lj-body{
+    margin-bottom: 70px;
+    margin-top: 40px;
+    font-size: 24px;
+}
+
+.survey-jumbotron{
+    text-align: center;
+}
+
+.survey-jumbotron .s-header{
+    text-align: left;
+}
+
+.survey-jumbotron .s-body{
+    text-align: left;
+}
+
+.survey-jumbotron .s-footer{
+    text-align: center;
+}
