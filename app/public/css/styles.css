@@ -1,3 +1,4 @@
+/* Body styles */
 body{
     background-color: #3b5998;
 }
@@ -47,4 +48,10 @@ body{
 
 .survey-jumbotron .s-footer{
     text-align: center;
+}
+
+/* Modal styles */
+.friend-tile{
+    max-width: 300px;
+    margin: 0 auto;
 }
