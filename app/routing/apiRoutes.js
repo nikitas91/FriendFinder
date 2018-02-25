@@ -10,26 +10,40 @@ module.exports = function (app) {
         let userObject = req.body;
         let userSurveyResponses = userObject.scores;
 
-        let userMatchName = "";
-        let userMathImage = "";
-        let lowestDifference;
-
+        //  Run a check to see if user already exists
+        let userFound = false;
         for (let i = 0; i < friends.length; i++) {
-            let computedDifference = 0;
-
-            for (let j = 0; j < userSurveyResponses.length; j++) {
-                computedDifference += Math.abs(friends[i].scores[j] - userSurveyResponses[j]);
-            }
-
-            if (!lowestDifference || (computedDifference < lowestDifference)) {
-                lowestDifference = computedDifference;
-                userMatchName = friends[i].name;
-                userMathImage = friends[i].photo;
+            if (userObject.name.toLowerCase() === friends[i].name.toLowerCase()) {
+                userFound = true;
+                break;
             }
         }
 
-        friends.push(userObject);
+        if (userFound) {
+            res.json({ error: true, errorMessage: "User already exists!" });
+        }
+        else {
+            let userMatchName = "";
+            let userMathImage = "";
+            let lowestDifference = 0;
 
-        res.json({ matchName: userMatchName, matchImage: userMathImage });
+            for (let i = 0; i < friends.length; i++) {
+                let computedDifference = 0;
+
+                for (let j = 0; j < userSurveyResponses.length; j++) {
+                    computedDifference += Math.abs(friends[i].scores[j] - userSurveyResponses[j]);
+                }
+
+                if (!lowestDifference || (computedDifference < lowestDifference)) {
+                    lowestDifference = computedDifference;
+                    userMatchName = friends[i].name;
+                    userMathImage = friends[i].photo;
+                }
+            }
+
+            friends.push(userObject);
+
+            res.json({ matchName: userMatchName, matchImage: userMathImage });
+        }
     });
 };

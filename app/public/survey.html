@@ -218,9 +218,14 @@
                 $.post('/api/friends', userInput).done(function (data) {
                     console.log(data);
 
-                    $("#userMatchName").html(data.matchName);
-                    $("#userMatchImage").attr("src", data.matchImage);
-                    $("#resultsModal").modal();
+                    if (data.error) {
+                        alert(data.errorMessage);
+                    }
+                    else {
+                        $("#userMatchName").html(data.matchName);
+                        $("#userMatchImage").attr("src", data.matchImage);
+                        $("#resultsModal").modal();
+                    }
                 });
             }
             else {
@@ -231,12 +236,12 @@
         function validateForm() {
             var validated = true;
 
-            if($("#userName").val() == "") validated = false;
-            if($("#userPhoto").val() == "") validated = false;
+            if ($("#userName").val() == "") validated = false;
+            if ($("#userPhoto").val() == "") validated = false;
 
-            $("select > option:selected").each(function(){
+            $("select > option:selected").each(function () {
                 console.log($(this).val());
-                if($(this).val() == "") validated = false;
+                if ($(this).val() == "") validated = false;
             });
 
             return validated;
